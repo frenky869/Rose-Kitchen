@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose's Kitchen | Fresh Mandazis, Chapatis & More</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        cursive: ['Pacifico', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#F97316',
+                            brown: '#78350F',
+                            cream: '#FFF7ED',
+                            green: '#4CAF50', // M-Pesa Green
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl md:text-3xl font-cursive text-brand-orange">Mama's Kitchen</a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold text-gray-600">
+                <a href="#menu" class="hover:text-brand-orange transition-colors">OUR MENU</a>
+                <a href="#custom-request" class="hover:text-brand-orange transition-colors">CUSTOM ORDER</a>
+                <a href="#contact" class="hover:text-brand-orange transition-colors">CONTACT</a>
+            </div>
+
+            <button onclick="openCart()" class="relative text-gray-600 hover:text-brand-orange transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-orange text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://image.pollinations.ai/prompt/stack%20of%20fresh%20warm%20chapatis%20and%20mandazis%20on%20a%20wooden%20table%20morning%20light%20high%20quality%20food%20photography?width=1920&height=1080&nologo=true" alt="Fresh Food Background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-3xl text-white fade-in">
+            <span class="bg-brand-orange px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 inline-block">Freshly Made Daily</span>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 font-cursive">Taste of Home</h1>
+            <p class="text-lg md:text-xl mb-8 text-gray-100">Soft layered Chapatis, golden Mandazis, and delicious stews delivered straight to your doorstep.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#menu" class="bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg">
+                    Order Now
+                </a>
+                <a href="#custom-request" class="bg-white hover:bg-gray-100 text-brand-orange font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg">
+                    Request Special Meal
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-brand-brown mb-4">Our Favorites</h2>
+                <p class="text-gray-600 max-w-xl mx-auto">Handmade with love using traditional recipes. Perfect for breakfast, lunch, or a quick snack.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1: Mandazi -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/golden%20brown%20triangular%20mandazis%20in%20a%20basket%20kenyan%20snack?width=600&height=400&nologo=true" alt="Mandazi" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 20</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Soft Mandazi</h3>
+                        <p class="text-gray-500 text-sm mb-4">Golden brown, soft, and slightly sweet. Perfect with morning tea.</p>
+                        <button onclick="addToCart('Soft Mandazi', 20)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Item 2: Chapati -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/layered%20soft%20chapati%20kenyan%20flatbread%20on%20plate?width=600&height=400&nologo=true" alt="Chapati" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 30</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Layered Chapati</h3>
+                        <p class="text-gray-500 text-sm mb-4">Flaky, soft, and oil-free options available. Great with stews.</p>
+                        <button onclick="addToCart('Layered Chapati', 30)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Item 3: Samosas -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/crispy%20beef%20samosas%20triangle%20pastry%20food%20photography?width=600&height=400&nologo=true" alt="Samosas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 50</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Beef Samosas</h3>
+                        <p class="text-gray-500 text-sm mb-4">Crispy pastry filled with spiced minced beef and onions.</p>
+                        <button onclick="addToCart('Beef Samosas', 50)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Item 4: Maharagwe -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/coconut%20bean%20stew%20maharagwe%20ya%20nazi%20kenyan%20dish?width=600&height=400&nologo=true" alt="Bean Stew" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 100</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Coconut Beans (Maharagwe)</h3>
+                        <p class="text-gray-500 text-sm mb-4">Tasty yellow beans cooked in rich coconut cream.</p>
+                        <button onclick="addToCart('Coconut Beans', 100)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Item 5: Pilau -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/swahili%20beef%20pilau%20rice%20dish%20dark%20spices?width=600&height=400&nologo=true" alt="Pilau" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 250</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Beef Pilau</h3>
+                        <p class="text-gray-500 text-sm mb-4">Authentic Swahili spiced rice with tender beef chunks.</p>
+                        <button onclick="addToCart('Beef Pilau', 250)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+
+                <!-- Item 6: Tea -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image.pollinations.ai/prompt/hot%20cup%20of%20kenyan%20masala%20tea%20steam%20spices?width=600&height=400&nologo=true" alt="Tea" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold text-brand-orange shadow">KES 50</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Masala Tea</h3>
+                        <p class="text-gray-500 text-sm mb-4">Hot, spiced milk tea. The perfect pair for Mandazis.</p>
+                        <button onclick="addToCart('Masala Tea', 50)" class="w-full border-2 border-brand-orange text-brand-orange font-bold py-2 rounded-xl hover:bg-brand-orange hover:text-white transition-colors">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Request Section -->
+    <section id="custom-request" class="py-20 px-6 bg-brand-orange/10 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-brand-orange/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-yellow-400/20 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h2 class="text-4xl font-bold text-brand-brown mb-6">Craving Something Special?</h2>
+                <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                    Don't see what you're looking for on the menu? We accept custom orders for office meetings, family gatherings, or just a specific craving!
+                    <br><br>
+                    Whether it's <strong>Githeri, Mukimo, Bhajias,</strong> or bulk orders of Chapatis, just tell us what you need.
+                </p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center text-gray-700">
+                        <svg class="w-5 h-5 text-brand-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Bulk ordering available
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <svg class="w-5 h-5 text-brand-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Fresh ingredients sourced daily
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <svg class="w-5 h-5 text-brand-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Specific dietary adjustments (e.g., less oil)
+                    </li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 bg-white p-8 rounded-2xl shadow-xl w-full">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Request a Meal</h3>
+                <form onsubmit="event.preventDefault(); alert('Request received! We will call you shortly to confirm price and time.');">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">What would you like?</label>
+                        <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="e.g. 50 Bhajias, 1kg Githeri...">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Any specific instructions?</label>
+                        <textarea class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange" rows="3" placeholder="e.g. Make it spicy, deliver by 1 PM..."></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Your Name</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-orange" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-brown hover:bg-gray-800 text-white font-bold py-3 rounded-lg transition-colors">
+                        Send Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-cursive text-brand-orange mb-6">Mama's Kitchen</h2>
+            <p class="text-gray-400 mb-8 max-w-lg mx-auto">Bringing the warmth of a home-cooked meal to your office or home. Authentic, fresh, and delicious.</p>
+            
+            <div class="flex justify-center gap-8 mb-8">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <span>+254 700 123 456</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span>order@mamaskitchen.com</span>
+                </div>
+            </div>
+            
+            <p class="text-gray-600 text-sm">&copy; 2025 Mama's Kitchen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal (Basket) -->
+    <div id="cart-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md p-6 rounded-2xl shadow-2xl relative m-4 transform transition-all scale-100">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h3 class="text-xl font-bold text-gray-800">Your Basket</h3>
+                <button onclick="closeCart()" class="text-gray-400 hover:text-red-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="space-y-4 max-h-60 overflow-y-auto mb-6">
+                <!-- Items injected here -->
+                <p class="text-gray-500 text-center py-4">Your basket is empty.</p>
+            </div>
+
+            <div class="flex justify-between items-center font-bold text-lg mb-6 pt-4 border-t">
+                <span>Total:</span>
+                <span id="cart-total" class="text-brand-orange">KES 0</span>
+            </div>
+
+            <button onclick="openPayment()" class="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                Checkout & Pay
+            </button>
+        </div>
+    </div>
+
+    <!-- M-Pesa Payment Modal -->
+    <div id="payment-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-sm p-8 rounded-2xl shadow-2xl relative m-4 transform transition-all scale-100">
+            <!-- Close Button -->
+            <button onclick="closePayment()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Lipa na M-Pesa</h3>
+                <p class="text-gray-500 text-sm mt-1">Secure Mobile Payment</p>
+            </div>
+
+            <!-- Summary -->
+            <div class="bg-gray-100 p-4 rounded-xl mb-6 flex justify-between items-center">
+                <div>
+                    <p class="text-sm text-gray-500">Total Amount</p>
+                    <p id="pay-amount" class="font-bold text-brand-orange text-xl">KES 0</p>
+                </div>
+                <div class="h-8 w-8 bg-brand-green rounded-full flex items-center justify-center text-white font-bold">M</div>
+            </div>
+
+            <!-- Form -->
+            <form id="mpesa-form" onsubmit="processPayment(event)">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2 text-gray-700">M-Pesa Phone Number</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">+254</span>
+                        <input type="tel" id="mpesa-number" class="w-full bg-white border border-gray-300 rounded-lg pl-14 p-3 text-gray-900 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition-all" placeholder="7XX XXX XXX" required pattern="[0-9]{9}">
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">Enter 9 digits (e.g., 712345678)</p>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-green hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                    Pay Now
+                </button>
+            </form>
+
+            <!-- Processing State -->
+            <div id="payment-status" class="hidden text-center py-6">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-green mx-auto mb-4"></div>
+                <p class="text-gray-800 font-semibold">Sending STK Push...</p>
+                <p class="text-sm text-gray-500">Please check your phone.</p>
+            </div>
+
+            <!-- Success State -->
+            <div id="payment-success" class="hidden text-center py-6">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                    <svg class="h-8 w-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <p class="text-gray-800 font-bold text-xl">Payment Successful!</p>
+                <p class="text-sm text-gray-500 mb-6">Your order has been received.</p>
+                <button onclick="finishOrder()" class="text-sm text-brand-green font-bold hover:underline">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        const cartCountEl = document.getElementById('cart-count');
+        const cartItemsEl = document.getElementById('cart-items');
+        const cartTotalEl = document.getElementById('cart-total');
+        const payAmountEl = document.getElementById('pay-amount');
+        const cartModal = document.getElementById('cart-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        
+        // M-Pesa Elements
+        const mpesaForm = document.getElementById('mpesa-form');
+        const paymentStatus = document.getElementById('payment-status');
+        const paymentSuccess = document.getElementById('payment-success');
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            
+            // Visual feedback on button
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "Added!";
+            btn.classList.add('bg-brand-orange', 'text-white');
+            btn.classList.remove('text-brand-orange', 'bg-white'); // simplistic toggle for demo
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('bg-brand-orange', 'text-white');
+                btn.classList.add('text-brand-orange', 'bg-white');
+            }, 1000);
+        }
+
+        function updateCartUI() {
+            cartCountEl.innerText = cart.length;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartTotalEl.innerText = `KES ${total}`;
+            payAmountEl.innerText = `KES ${total}`;
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<p class="text-gray-500 text-center py-4">Your basket is empty.</p>';
+            } else {
+                cartItemsEl.innerHTML = cart.map((item, index) => `
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                        <span class="text-gray-700 font-medium">${item.name}</span>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-gray-900">KES ${item.price}</span>
+                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function openCart() {
+            cartModal.classList.add('active');
+        }
+
+        function closeCart() {
+            cartModal.classList.remove('active');
+        }
+
+        function openPayment() {
+            if (cart.length === 0) return alert("Please add items to your basket first.");
+            closeCart();
+            paymentModal.classList.add('active');
+            
+            // Reset Payment Modal State
+            mpesaForm.classList.remove('hidden');
+            paymentStatus.classList.add('hidden');
+            paymentSuccess.classList.add('hidden');
+            document.getElementById('mpesa-number').value = '';
+        }
+
+        function closePayment() {
+            paymentModal.classList.remove('active');
+        }
+
+        function processPayment(e) {
+            e.preventDefault();
+            // Show Loading
+            mpesaForm.classList.add('hidden');
+            paymentStatus.classList.remove('hidden');
+
+            // Simulate API Delay
+            setTimeout(() => {
+                paymentStatus.classList.add('hidden');
+                paymentSuccess.classList.remove('hidden');
+                
+                // Clear cart on success
+                cart = [];
+                updateCartUI();
+            }, 3000);
+        }
+
+        function finishOrder() {
+            closePayment();
+            alert("Order sent to kitchen! We will contact you shortly.");
+        }
+
+        // Close modals on outside click
+        window.onclick = function(event) {
+            if (event.target == cartModal) closeCart();
+            if (event.target == paymentModal) closePayment();
+        }
+    </script>
+</body>
+</html>
